@@ -1,7 +1,6 @@
 # main.py
 
-from methods import Estudiante # Asegúrate de que 'methods.py' esté en el mismo directorio
-
+from methods import Estudiante 
 def mostrar_menu():
     """Muestra las opciones de atributos que se pueden modificar."""
     print("\n--- Modificar Atributos del Estudiante ---")
@@ -97,7 +96,7 @@ def main():
     nacionalidad_inicial = input("Nacionalidad: ")
 
 
-    # Crear la instancia del estudiante con los datos iniciales
+    # Crear objeto
     estudiante1 = Estudiante(
         nombre=nombre_inicial,
         apellido=apellido_inicial,
@@ -116,7 +115,7 @@ def main():
         nacionalidad=nacionalidad_inicial
     )
 
-    # Bucle principal para la interacción con el usuario
+    # Bucle  para la interacción con el usuario
     while True:
         estudiante1.mostrar_informacion() # Mostrar información actual antes del menú
         mostrar_menu()

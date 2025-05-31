@@ -5,7 +5,7 @@ class Estudiante:
                  creditos_aprobados, materias_cursadas, fecha_ingreso,
                  estado_academico, beca, correo_electronico, telefono,
                  direccion, nacionalidad):
-        # Atributos que se pueden  mediante funciones 
+        # Atributos mediante funciones 
         self.nombre = nombre
         self.apellido = apellido
         self.edad = edad
