@@ -192,7 +192,7 @@ def main():
         else:
             print("Opción no válida. Por favor, intente de nuevo.")
         
-        input("\nPresione Enter para continuar...") # Pausa para ver los cambios antes de la siguiente iteración
+        input("\nPresione Enter para continuar...") 
 
 if __name__ == "__main__":
     main()
