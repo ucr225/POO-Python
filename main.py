@@ -1,6 +1,6 @@
-# main.py
+import os
+from methods import Estudiante
 
-from methods import Estudiante 
 def mostrar_menu():
     """Muestra las opciones de atributos que se pueden modificar."""
     print("\n--- Modificar Atributos del Estudiante ---")
@@ -24,14 +24,24 @@ def mostrar_menu():
     print("------------------------------------------")
 
 def main():
+    os.system('cls' if os.name == 'nt' else 'clear')  
     print("¡Bienvenido al sistema de gestión de estudiantes!")
     print("Por favor, ingrese los datos iniciales para el nuevo estudiante.")
 
-    # Solicitar al usuario los datos iniciales para el estudiante
-    nombre_inicial = input("Nombre: ")
-    apellido_inicial = input("Apellido: ")
-    
-    # Validar edad como entero positivo
+    #  datos iniciales 
+    while True:
+        nombre_inicial = input("Nombre: ").strip()
+        if nombre_inicial:
+            break
+        print("Error: El nombre no puede estar vacío.")
+
+    while True:
+        apellido_inicial = input("Apellido: ").strip()
+        if apellido_inicial:
+            break
+        print("Error: El apellido no puede estar vacío.")
+
+    # Validar edad como entero 
     while True:
         try:
             edad_inicial = int(input("Edad: "))
@@ -42,10 +52,19 @@ def main():
         except ValueError:
             print("Entrada inválida. Por favor, ingrese un número entero para la edad.")
 
-    carnet_inicial = input("Carnet: ")
-    carrera_inicial = input("Carrera: ")
-    
-    # Validar promedio como número entre 0 y 20
+    while True:
+        carnet_inicial = input("Carnet: ").strip()
+        if carnet_inicial:
+            break
+        print("Error: El carnet no puede estar vacío.")
+
+    while True:
+        carrera_inicial = input("Carrera: ").strip()
+        if carrera_inicial:
+            break
+        print("Error: La carrera no puede estar vacía.")
+
+    # Validar promedio 
     while True:
         try:
             promedio_inicial = float(input("Promedio (0-20): "))
@@ -56,7 +75,7 @@ def main():
         except ValueError:
             print("Entrada inválida. Por favor, ingrese un número para el promedio.")
 
-    # Validar créditos aprobados como entero no negativo
+    # Validar créditos aprobados 
     while True:
         try:
             creditos_iniciales = int(input("Créditos Aprobados: "))
@@ -66,35 +85,45 @@ def main():
                 print("Los créditos aprobados deben ser un número entero no negativo.")
         except ValueError:
             print("Entrada inválida. Por favor, ingrese un número entero para los créditos.")
-            
-    materias_iniciales_str = input("Materias Cursadas (separadas por coma, ej: Matematicas,Fisica): ")
-    materias_iniciales = [materia.strip() for materia in materias_iniciales_str.split(',') if materia.strip()]
-    
-    fecha_ingreso_inicial = input("Fecha de Ingreso (ej: 2023-09-01): ")
-    
+
+    while True:
+        materias_iniciales_str = input("Materias Cursadas (separadas por coma, ej: Matematicas,Fisica): ").strip()
+        materias_iniciales = [materia.strip() for materia in materias_iniciales_str.split(',') if materia.strip()]
+        if materias_iniciales:
+            break
+        print("Error: Debe ingresar al menos una materia válida.")
+
+    while True:
+        fecha_ingreso_inicial = input("Fecha de Ingreso (ej: 2023-09-01): ").strip()
+        if fecha_ingreso_inicial:
+            break
+        print("Error: La fecha de ingreso no puede estar vacía.")
+
     # Validar estado académico
     estados_validos = ["Activo", "Suspendido", "Graduado", "Egresado"]
     while True:
-        estado_academico_inicial = input(f"Estado Académico ({', '.join(estados_validos)}): ")
+        estado_academico_inicial = input(f"Estado Académico ({', '.join(estados_validos)}): ").strip()
         if estado_academico_inicial in estados_validos:
             break
-        else:
-            print(f"Estado académico inválido. Por favor, elija entre: {', '.join(estados_validos)}")
-            
+        print(f"Estado académico inválido. Por favor, elija entre: {', '.join(estados_validos)}")
+
     # Validar beca
     while True:
-        beca_inicial_str = input("¿Tiene Beca? (Sí/No): ").lower()
+        beca_inicial_str = input("¿Tiene Beca? (Sí/No): ").lower().strip()
         if beca_inicial_str in ['si', 'no']:
             beca_inicial = True if beca_inicial_str == 'si' else False
             break
-        else:
-            print("Respuesta inválida. Por favor, escriba 'Sí' o 'No'.")
-            
-    correo_inicial = input("Correo Electrónico: ")
-    telefono_inicial = input("Teléfono: ")
-    direccion_inicial = input("Dirección: ")
-    nacionalidad_inicial = input("Nacionalidad: ")
+        print("Respuesta inválida. Por favor, escriba 'Sí' o 'No'.")
 
+    while True:
+        correo_inicial = input("Correo Electrónico: ").strip()
+        if correo_inicial and "@" in correo_inicial and "." in correo_inicial:
+            break
+        print("Error: Formato de correo electrónico inválido o vacío.")
+
+    telefono_inicial = input("Teléfono: ").strip() or "No especificado"
+    direccion_inicial = input("Dirección: ").strip() or "No especificada"
+    nacionalidad_inicial = input("Nacionalidad: ").strip() or "No especificada"
 
     # Crear objeto
     estudiante1 = Estudiante(
@@ -115,20 +144,21 @@ def main():
         nacionalidad=nacionalidad_inicial
     )
 
-    # Bucle  para la interacción con el usuario
+    # Bucle para la interacción con el usuario
     while True:
-        estudiante1.mostrar_informacion() # Mostrar información actual antes del menú
+        estudiante1.mostrar_informacion()  # Mostrar información actual 
         mostrar_menu()
-        opcion = input("Seleccione el número del atributo a modificar (0 para salir): ")
+        opcion = input("Seleccione el número del atributo a modificar (0 para salir): ").strip()
 
         if opcion == '0':
+            os.system('cls' if os.name == 'nt' else 'clear')  
             print("¡Gracias por usar el sistema! Saliendo del programa.")
             break
         elif opcion == '1':
-            nuevo_valor = input("Ingrese el nuevo nombre: ")
+            nuevo_valor = input("Ingrese el nuevo nombre: ").strip()
             estudiante1.set_nombre(nuevo_valor)
         elif opcion == '2':
-            nuevo_valor = input("Ingrese el nuevo apellido: ")
+            nuevo_valor = input("Ingrese el nuevo apellido: ").strip()
             estudiante1.set_apellido(nuevo_valor)
         elif opcion == '3':
             try:
@@ -137,10 +167,10 @@ def main():
             except ValueError:
                 print("Entrada inválida. Por favor, ingrese un número entero para la edad.")
         elif opcion == '4':
-            nuevo_valor = input("Ingrese el nuevo carnet: ")
+            nuevo_valor = input("Ingrese el nuevo carnet: ").strip()
             estudiante1.set_carnet(nuevo_valor)
         elif opcion == '5':
-            nuevo_valor = input("Ingrese la nueva carrera: ")
+            nuevo_valor = input("Ingrese la nueva carrera: ").strip()
             estudiante1.set_carrera(nuevo_valor)
         elif opcion == '6':
             try:
@@ -155,18 +185,17 @@ def main():
             except ValueError:
                 print("Entrada inválida. Por favor, ingrese un número entero para los créditos.")
         elif opcion == '8':
-            materias_str = input("Ingrese las nuevas materias cursadas (separadas por coma, ej: Matematicas,Fisica): ")
+            materias_str = input("Ingrese las nuevas materias cursadas (separadas por coma, ej: Matematicas,Fisica): ").strip()
             nuevas_materias = [materia.strip() for materia in materias_str.split(',') if materia.strip()]
             estudiante1.set_materias_cursadas(nuevas_materias)
         elif opcion == '9':
-            nuevo_valor = input("Ingrese la nueva fecha de ingreso (ej: 2024-01-15): ")
+            nuevo_valor = input("Ingrese la nueva fecha de ingreso (ej: 2024-01-15): ").strip()
             estudiante1.set_fecha_ingreso(nuevo_valor)
         elif opcion == '10':
-            estados_validos = ["Activo", "Suspendido", "Graduado", "Egresado"]
-            nuevo_estado = input(f"Ingrese el nuevo estado académico ({', '.join(estados_validos)}): ")
+            nuevo_estado = input(f"Ingrese el nuevo estado académico ({', '.join(estados_validos)}): ").strip()
             estudiante1.set_estado_academico(nuevo_estado)
         elif opcion == '11':
-            respuesta_beca = input("¿El estudiante tiene beca ahora? (Sí/No): ").lower()
+            respuesta_beca = input("¿El estudiante tiene beca ahora? (Sí/No): ").lower().strip()
             if respuesta_beca == 'si':
                 estudiante1.set_beca(True)
             elif respuesta_beca == 'no':
@@ -174,24 +203,24 @@ def main():
             else:
                 print("Entrada inválida. Por favor, responda 'Sí' o 'No'.")
         elif opcion == '12':
-            nuevo_valor = input("Ingrese el nuevo correo electrónico: ")
+            nuevo_valor = input("Ingrese el nuevo correo electrónico: ").strip()
             estudiante1.set_correo_electronico(nuevo_valor)
         elif opcion == '13':
-            nuevo_valor = input("Ingrese el nuevo teléfono: ")
+            nuevo_valor = input("Ingrese el nuevo teléfono: ").strip() or "No especificado"
             estudiante1.telefono = nuevo_valor
             print("Teléfono actualizado directamente.")
         elif opcion == '14':
-            nuevo_valor = input("Ingrese la nueva dirección: ")
+            nuevo_valor = input("Ingrese la nueva dirección: ").strip() or "No especificada"
             estudiante1.direccion = nuevo_valor
             print("Dirección actualizada directamente.")
         elif opcion == '15':
-            nuevo_valor = input("Ingrese la nueva nacionalidad: ")
+            nuevo_valor = input("Ingrese la nueva nacionalidad: ").strip() or "No especificada"
             estudiante1.nacionalidad = nuevo_valor
             print("Nacionalidad actualizada directamente.")
         else:
             print("Opción no válida. Por favor, intente de nuevo.")
-        
-        input("\nPresione Enter para continuar...") 
+
+        input("\nPresione Enter para continuar...")
 
 if __name__ == "__main__":
     main()
