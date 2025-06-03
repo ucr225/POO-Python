@@ -2,6 +2,9 @@ import os
 import re
 from datetime import datetime
 
+
+#EN ESTE ARCHIVO SE ENCUENTRAN TODAS LAS FUNCIONES DEL PROGRAMA
+
 class Estudiante:
     def __init__(self, nombre, apellido, edad, carnet, carrera, promedio,
                  creditos_aprobados, materias_cursadas, fecha_ingreso,
